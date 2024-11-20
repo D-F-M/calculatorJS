@@ -5,6 +5,7 @@ let currentNum = "";
 let num1 = null;
 let num2 = null;
 let operator = "";
+let answer = null;
 
 function clear(){
     currentNum = "";
@@ -75,20 +76,29 @@ function btnPress(){
     else if (this.value == '='){
         if(num1 != null && operator != ""){
             num2 = currentNum;
-            let answer = operate(num1, operator, num2);
+            answer = operate(num1, operator, num2);
             display.textContent = answer;
             return answer; 
         }
     }
 
     else{
-        if(num1 != null){
+        if(num1 != null && answer == null){
+            alert("hello");
             num2 = display.textContent;
-            let answer = operate(num1, operator, num2);
+            answer = operate(num1, operator, num2);
             display.textContent = answer;
             num1 = answer;
             operator = this.value;
             currentNum = "";
+            return;
+        }
+
+        else if(num1 != null){
+            num1 = answer;
+            operator = this.value;
+            currentNum = "";
+            display.textContent = 0;
             return;
         }
 
